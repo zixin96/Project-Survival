@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    Rigidbody movementRigidbody;
+    Rigidbody mRigidbody;
+    AudioSource mAudioSource;
+
     [SerializeField] float mainThrust = 1000.0f;
     [SerializeField] float rotateThrust = 100.0f;
     // Start is called before the first frame update
     void Start()
     {
-        movementRigidbody = GetComponent<Rigidbody>();
+        mAudioSource = GetComponent<AudioSource>();
+        mRigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -24,7 +27,15 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            movementRigidbody.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime);
+            if(!mAudioSource.isPlaying)
+            {
+                mAudioSource.Play();
+            }
+            mRigidbody.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime);
+        }
+        else
+        {
+            mAudioSource.Stop();
         }
     }
 
@@ -42,8 +53,8 @@ public class Movement : MonoBehaviour
     void ApplyRotation(float thrust)
     {
         // Freeze/unfreeze solves obstacle edges bug
-        movementRigidbody.freezeRotation = true; // freezing rotation so we can manually rotate
+        mRigidbody.freezeRotation = true; // freezing rotation so we can manually rotate
         transform.Rotate(Vector3.forward * thrust * Time.deltaTime);
-        movementRigidbody.freezeRotation = false; // unfreezing rotation so the physics system can take over
+        mRigidbody.freezeRotation = false; // unfreezing rotation so the physics system can take over
     }
 }
