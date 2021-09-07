@@ -45,11 +45,11 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A))
         {
-            ApplyRotation(rotateThrust);
+            ApplyRotation(-rotateThrust);
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            ApplyRotation(-rotateThrust);
+            ApplyRotation(rotateThrust);
         }
     }
     void ApplyRotation(float thrust)

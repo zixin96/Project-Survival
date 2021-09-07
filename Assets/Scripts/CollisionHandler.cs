@@ -38,7 +38,6 @@ public class CollisionHandler : MonoBehaviour
 
     void StartCrashSequence()
     {
-        // TODO: Add SFX upon crash
         isTransitioning = true;
         mAudioSource.Stop();
         mAudioSource.PlayOneShot(crashSound);
@@ -49,7 +48,6 @@ public class CollisionHandler : MonoBehaviour
 
     void StartNextLevelSequence()
     {
-        // TODO: Add SFX upon success
         isTransitioning = true;
         mAudioSource.Stop();
         mAudioSource.PlayOneShot(successSound);
