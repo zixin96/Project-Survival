@@ -16,13 +16,7 @@ public class CollisionHandler : MonoBehaviour
     bool isTransitioning = false;
     bool collisionDisabled = false;
 
-    public void LoadNextLevel()
-    {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        int nextSceneIndex = currentSceneIndex + 1;
-        SceneManager.LoadScene(nextSceneIndex % SceneManager.sceneCountInBuildSettings);
-    }
-
+ 
     void Start()
     {
         mAudioSource = GetComponent<AudioSource>();
@@ -90,4 +84,13 @@ public class CollisionHandler : MonoBehaviour
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
     }
+
+    void LoadNextLevel()
+    {
+        // int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        // int nextSceneIndex = currentSceneIndex + 1;
+        // SceneManager.LoadScene(nextSceneIndex % SceneManager.sceneCountInBuildSettings);
+        SceneManager.LoadScene(0);
+    }
+
 }
