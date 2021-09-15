@@ -15,6 +15,7 @@ public class Movement : MonoBehaviour
     Rigidbody mRigidbody;
     AudioSource mAudioSource;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,7 +39,6 @@ public class Movement : MonoBehaviour
         else
         {
             StopThrusting();
-
         }
     }
 
@@ -59,6 +59,7 @@ public class Movement : MonoBehaviour
             StopRotating();
         }
     }
+
 
     void StartThrusting()
     {
