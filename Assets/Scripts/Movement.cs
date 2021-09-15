@@ -33,23 +33,12 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            if(!mAudioSource.isPlaying)
-            {
-                mAudioSource.PlayOneShot(engineThrust);
-            }
-            // Whenever we call Play, the particle system restarts,
-            // which is not what we want. 
-            if (!mainBoosterParticles.isPlaying)
-            {
-                mainBoosterParticles.Play();
-            }
-;
-            mRigidbody.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime);
+            StartThrusting();
         }
         else
         {
-            mainBoosterParticles.Stop();
-            mAudioSource.Stop();
+            StopThrusting();
+
         }
     }
 
@@ -57,26 +46,67 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A))
         {
-            if (!rightBoosterParticles.isPlaying)
-            {
-                rightBoosterParticles.Play();
-            }
-            ApplyRotation(-rotateThrust);
+            StartRotatingLeft();
+
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            if (!leftBoosterParticles.isPlaying)
-            {
-                leftBoosterParticles.Play();
-            }
-            ApplyRotation(rotateThrust);
+            StartRotatingRight();
+
         }
         else
         {
-            rightBoosterParticles.Stop();
-            leftBoosterParticles.Stop();
+            StopRotating();
         }
     }
+
+    void StartThrusting()
+    {
+        if (!mAudioSource.isPlaying)
+        {
+            mAudioSource.PlayOneShot(engineThrust);
+        }
+        // Whenever we call Play, the particle system restarts,
+        // which is not what we want. 
+        if (!mainBoosterParticles.isPlaying)
+        {
+            mainBoosterParticles.Play();
+        }
+        ;
+        mRigidbody.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime);
+    }
+
+    void StopThrusting()
+    {
+        mainBoosterParticles.Stop();
+        mAudioSource.Stop();
+    }
+
+
+    void StartRotatingLeft()
+    {
+        if (!rightBoosterParticles.isPlaying)
+        {
+            rightBoosterParticles.Play();
+        }
+        ApplyRotation(-rotateThrust);
+    }
+
+    void StartRotatingRight()
+    {
+        if (!leftBoosterParticles.isPlaying)
+        {
+            leftBoosterParticles.Play();
+        }
+        ApplyRotation(rotateThrust);
+    }
+
+    void StopRotating()
+    {
+        rightBoosterParticles.Stop();
+        leftBoosterParticles.Stop();
+    }
+
     void ApplyRotation(float thrust)
     {
         // Freeze/unfreeze solves obstacle edges bug
